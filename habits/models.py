@@ -25,3 +25,10 @@ class Habit(models.Model):
                                          help_text='Введите время на выполнение привычки в секундах', **NULLABLE)
     is_public = models.BooleanField(default=False, verbose_name='Признак публичности',
                                     help_text='Выберите, если хотите опубликовать свою привычку в общий доступ')
+
+    def __str__(self):
+        return f'{self.action}'
+
+    class Meta:
+        verbose_name = 'Привычка'
+        verbose_name_plural = 'Привычки'
