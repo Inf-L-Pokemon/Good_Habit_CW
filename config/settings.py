@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_celery_beat',
 
     'users',
     'habits',
@@ -150,3 +151,20 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7)
 }
+
+TELEGRAM_URL = 'https://api.telegram.org/bot'
+TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN')
+
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
+
+CELERY_BEAT_SCHEDULE = {
+    'telegram_notification': {
+        'task': 'habits.tasks.telegram_notification',
+        'schedule': timedelta(minutes=5)
+    }
+}
+
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 15000
