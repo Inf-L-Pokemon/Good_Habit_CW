@@ -1,6 +1,6 @@
 from django.db import models
 
-from users.models import User
+from config.settings import AUTH_USER_MODEL
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -8,7 +8,8 @@ NULLABLE = {'blank': True, 'null': True}
 class Habit(models.Model):
     action = models.CharField(max_length=300, verbose_name='Действие',
                               help_text='Введите действие, которое вы будете выполнять')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Создатель привычки', related_name='habits')
+    owner = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Создатель привычки',
+                              related_name='habits', **NULLABLE)
     place = models.CharField(max_length=50, verbose_name='Место',
                              help_text='Введите место в котором необходимо выполнять привычку', **NULLABLE)
     time = models.TimeField(verbose_name='Время',
