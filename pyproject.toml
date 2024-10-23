@@ -20,6 +20,7 @@ eventlet = "^0.37.0"
 redis = "^5.1.1"
 requests = "^2.32.3"
 django-celery-beat = "^2.7.0"
+django-cors-headers = "^4.5.0"
 
 
 [build-system]
